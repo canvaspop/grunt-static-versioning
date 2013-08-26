@@ -1,6 +1,6 @@
 /*
- * grunt-versioning
- * http://github.com/canvaspop/grunt-versioning
+ * grunt-static-versioning
+ * http://github.com/canvaspop/grunt-static-versioning
  *
  * Copyright (c) 2013 CanvasPop
  * Licensed under the MIT license.

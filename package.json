@@ -1,23 +1,23 @@
 {
-  "name": "grunt-static-version",
+  "name": "grunt-static-versioning",
   "description": "Version static assets.",
   "version": "0.1.0",
-  "homepage": "https://github.com/canvaspop/grunt-static-version",
+  "homepage": "https://github.com/canvaspop/grunt-static-versioning",
   "author": {
     "name": "CanvasPop",
     "url": "http://github.com/canvaspop/"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/canvaspop/grunt-static-version.git"
+    "url": "git://github.com/canvaspop/grunt-static-versioning.git"
   },
   "bugs": {
-    "url": "https://github.com/canvaspop/grunt-static-version/issues"
+    "url": "https://github.com/canvaspop/grunt-static-versioning/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/canvaspop/grunt-static-version/blob/master/LICENSE-MIT"
+      "url": "https://github.com/canvaspop/grunt-static-versioning/blob/master/LICENSE-MIT"
     }
   ],
   "main": "Gruntfile.js",

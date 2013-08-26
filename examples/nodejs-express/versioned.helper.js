@@ -26,7 +26,7 @@ module.exports = function ( app ) {
     app.locals( {
         // render all <link> tags based on key
         renderLinksTags: function ( key ) {
-            // `staticAssets`: default namespace of the grunt-versioning plugin
+            // `staticAssets`: default namespace of the grunt-static-versioning plugin
             var obj = data.staticAssets[ key ];
             if ( obj && obj.css ) {
                 return obj.css.map( function ( src ) {
@@ -39,7 +39,7 @@ module.exports = function ( app ) {
 
         // render all <script> tags based on key
         renderScriptsTags: function ( key ) {
-            // `staticAssets`: default namespace of the grunt-versioning plugin
+            // `staticAssets`: default namespace of the grunt-static-versioning plugin
             var obj = data.staticAssets[ key ];
             if ( obj && obj.js ) {
                 return obj.js.map( function ( src ) {
