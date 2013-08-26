@@ -1,0 +1,25 @@
+{
+  "staticAssets": {
+    "global": {
+      "js": [
+        "/static/test/src/js/file1.js",
+        "/static/test/src/js/file2.js",
+        "/static/test/components/test/test.js",
+        "/static/test/src/js/file3.js",
+        "/static/test/src/js/file4.js"
+      ],
+      "css": [
+        "/static/test/src/css/main.css"
+      ]
+    },
+    "all": {
+      "js": [
+        "/static/test/src/js/file1.js",
+        "/static/test/src/js/file2.js",
+        "/static/test/src/js/file3.js",
+        "/static/test/src/js/file4.js"
+      ],
+      "css": []
+    }
+  }
+}

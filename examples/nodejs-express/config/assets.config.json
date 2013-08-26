@@ -1,0 +1,20 @@
+{
+  "staticAssets": {
+    "global": {
+      "js": [
+        "/js/file1.js",
+        "/js/file2.js"
+      ],
+      "css": [
+        "/css/main.css"
+      ]
+    },
+    "all": {
+      "js": [
+        "/js/file3.js",
+        "/js/file4.js"
+      ],
+      "css": []
+    }
+  }
+}

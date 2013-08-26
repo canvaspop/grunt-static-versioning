@@ -1,0 +1,19 @@
+{
+  "staticAssets": {
+    "global": {
+      "js": [
+        "/main.c2e864c8.js",
+        "/plugin.24d54461.js"
+      ],
+      "css": [
+        "/main.b6f17edb.css"
+      ]
+    },
+    "all": {
+      "js": [
+        "/all.625a4fd0.js"
+      ],
+      "css": []
+    }
+  }
+}
