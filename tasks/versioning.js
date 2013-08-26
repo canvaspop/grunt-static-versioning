@@ -49,12 +49,8 @@ module.exports = function ( grunt ) {
             }
 
             file.assets.forEach( function ( asset ) {
-                var hash = crypto.createHash( 'md5' ).update( grunt.file.read( asset.dest, 'utf8' ) ).digest( 'hex' ).substring( 0, 8 ),
-                    sep = asset.dest.split( '/' ),
-                    name = sep[ sep.length - 1 ].replace( /(.min)?.(js|css)/, '' ),
-                    fileDest = file.dest === '' ? '' : ( file.dest + '/' ),
-                    dest = fileDest + '' + name + '.' + hash + '' + file.ext,
-                    parent = asset.versioningParent;
+                var parent = asset.versioningParent,
+                    fileDest = file.dest === '' ? '' : ( file.dest + '/' );
 
                 // @todo Possibly find a cleaner way to get this property to the
                 // task instead of adding keys to the uglify and cssmin tasks
@@ -69,6 +65,11 @@ module.exports = function ( grunt ) {
                 // production: copy minified files over
                 // development: copy src files over
                 if ( env === 'prod' ) {
+                    var hash = crypto.createHash( 'md5' ).update( grunt.file.read( asset.dest, 'utf8' ) ).digest( 'hex' ).substring( 0, 8 ),
+                        sep = asset.dest.split( '/' ),
+                        name = sep[ sep.length - 1 ].replace( /(.min)?.(js|css)/, '' ),
+                        dest = fileDest + '' + name + '.' + hash + '' + file.ext;
+
                     // push minified file only to versioning object
                     versioning[ parent ][ file.type ].push( '/' + dest );
                     // copy file to out directory and log it
