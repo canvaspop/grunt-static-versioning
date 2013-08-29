@@ -1,5 +1,4 @@
-grunt-static-versioning
-================
+# grunt-static-versioning [![Build Status](https://secure.travis-ci.org/canvaspop/grunt-static-versioning.png?branch=master)](http://travis-ci.org/canvaspop/grunt-static-versioning)
 
 > Version static assets
 
