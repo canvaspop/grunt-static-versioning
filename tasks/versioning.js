@@ -49,13 +49,11 @@ module.exports = function ( grunt ) {
             }
 
             file.assets.forEach( function ( asset ) {
-                var parent = asset.versioningParent,
+                var parent = file.key,
                     fileDest = file.dest === '' ? '' : ( file.dest + '/' );
 
-                // @todo Possibly find a cleaner way to get this property to the
-                // task instead of adding keys to the uglify and cssmin tasks
                 if ( !parent ) {
-                    grunt.fail.warn( 'Invalid argument : `versioningParent` property must be set' );
+                    grunt.fail.warn( 'Invalid argument : `key` property must be set' );
                 }
 
                 // store information to be able to retrieve later
@@ -68,12 +66,15 @@ module.exports = function ( grunt ) {
                     var hash = crypto.createHash( 'md5' ).update( grunt.file.read( asset.dest, 'utf8' ) ).digest( 'hex' ).substring( 0, 8 ),
                         sep = asset.dest.split( '/' ),
                         name = sep[ sep.length - 1 ].replace( /(.min)?.(js|css)/, '' ),
-                        dest = fileDest + '' + name + '.' + hash + '' + file.ext;
+                        dest = fileDest + '' + name + '.' + hash + '' + file.ext,
+                        content = grunt.file.read( asset.dest );
 
                     // push minified file only to versioning object
                     versioning[ parent ][ file.type ].push( '/' + dest );
-                    // copy file to out directory and log it
-                    grunt.file.copy( asset.dest, cwd + '' + dest );
+                    // write file to out directory and log it
+                    // this allows future content manipulation (e.g. sourcemaps)
+                    // rather than simply copying the file over
+                    grunt.file.write( cwd + '' + dest, content );
                     grunt.log.ok( 'File "' + cwd + '' + dest + '" created.' );
                 } else {
                     asset.src.forEach( function ( src ) {
@@ -132,7 +133,7 @@ module.exports = function ( grunt ) {
         var json = JSON.stringify( content, null, 2 );
         grunt.log.subhead( 'Generating JSON config file' );
         grunt.file.write( dest + '/assets.config.json', json );
-        grunt.log.ok( 'File " '+ dest + '/assets.config.json" created.' );
+        grunt.log.ok( 'File "' + dest + '/assets.config.json" created.' );
     }
 
     /**
@@ -166,7 +167,7 @@ module.exports = function ( grunt ) {
 
         grunt.log.subhead( 'Generating PHP config file' );
         grunt.file.write( dest + '/assets.config.php', contents );
-        grunt.log.ok( 'File " '+ dest + '/assets.config.php" created.' );
+        grunt.log.ok( 'File "' + dest + '/assets.config.php" created.' );
     }
 
     /**

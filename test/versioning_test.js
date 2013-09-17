@@ -10,10 +10,10 @@ exports.versioning = {
         var main, plug, style;
 
         try {
-            main = grunt.file.read( 'public/js/main.c2e864c8.min.js' );
+            main = grunt.file.read( 'public/js/main.cce1a4ed.min.js' );
         } catch ( e ) {}
         try {
-            plug = grunt.file.read( 'public/js/plugin.24d54461.min.js' );
+            plug = grunt.file.read( 'public/js/plugin.71f3b3f2.min.js' );
         } catch ( e ) {}
         try {
             style = grunt.file.read( 'public/css/main.b6f17edb.min.css' );
@@ -34,10 +34,10 @@ exports.versioning = {
             expected = grunt.file.read( fixtures + '/assets.config.prod.php' );
 
         try {
-            main = grunt.file.read( 'public2/js/main.c2e864c8.js' );
+            main = grunt.file.read( 'public2/js/main.cce1a4ed.js' );
         } catch ( e ) {}
         try {
-            plug = grunt.file.read( 'public2/js/plugin.24d54461.js' );
+            plug = grunt.file.read( 'public2/js/plugin.71f3b3f2.js' );
         } catch ( e ) {}
         try {
             style = grunt.file.read( 'public2/css/main.b6f17edb.css' );

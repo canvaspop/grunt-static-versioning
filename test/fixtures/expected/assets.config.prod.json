@@ -2,8 +2,8 @@
   "staticAssets": {
     "global": {
       "js": [
-        "/main.c2e864c8.js",
-        "/plugin.24d54461.js"
+        "/main.cce1a4ed.js",
+        "/plugin.71f3b3f2.js"
       ],
       "css": [
         "/main.b6f17edb.css"
@@ -11,7 +11,7 @@
     },
     "all": {
       "js": [
-        "/all.625a4fd0.js"
+        "/all.3039dd25.js"
       ],
       "css": []
     }

@@ -14,15 +14,14 @@ module.exports = function ( grunt ) {
     grunt.initConfig({
 
         cssmin: {
-            dist: {
-                options: {
-                    banner: '/*! banner */',
-                    report: 'gzip'
-                },
+            options: {
+                banner: '/*! banner */',
+                report: 'gzip'
+            },
+            main: {
                 files: [{
                     src: [ 'test/src/css/main.css' ],
-                    dest: 'tmp/css/main.min.css',
-                    versioningParent: 'global'
+                    dest: 'tmp/css/main.min.css'
                 }]
             }
         },
@@ -50,35 +49,38 @@ module.exports = function ( grunt ) {
         },
 
         uglify: {
-            dist: {
-                options: {
-                    mangle: true,
-                    wrap: true
-                },
+            options: {
+                mangle: true,
+                wrap: false
+            },
+            main: {
                 files: [{
                     src: [
                         'test/src/js/file1.js',
                         'test/src/js/file2.js',
                         'test/components/test/test.js'
                     ],
-                    dest: 'tmp/js/main.min.js',
-                    versioningParent: 'global'
-                }, {
+                    dest: 'tmp/js/main.min.js'
+                }]
+            },
+            plugin: {
+                files: [{
                     src: [
                         'test/src/js/file3.js',
                         'test/src/js/file4.js'
                     ],
-                    dest: 'tmp/js/plugin.min.js',
-                    versioningParent: 'global'
-                }, {
+                    dest: 'tmp/js/plugin.min.js'
+                }]
+            },
+            all: {
+                files: [{
                     src: [
                         'test/src/js/file1.js',
                         'test/src/js/file2.js',
                         'test/src/js/file3.js',
                         'test/src/js/file4.js'
                     ],
-                    dest: 'tmp/js/all.min.js',
-                    versioningParent: 'all'
+                    dest: 'tmp/js/all.min.js'
                 }]
             }
         },
@@ -92,12 +94,28 @@ module.exports = function ( grunt ) {
                     outputConfigDir: 'public/config'
                 },
                 files: [{
-                    assets: '<%= uglify.dist.files %>',
+                    assets: '<%= uglify.main.files %>',
+                    key: 'global',
                     dest: 'js',
                     type: 'js',
                     ext: '.min.js'
                 }, {
-                    assets: '<%= cssmin.dist.files %>',
+                    assets: '<%= uglify.plugin.files %>',
+                    key: 'global',
+                    dest: 'js',
+                    type: 'js',
+                    ext: '.min.js'
+                }, {
+                    assets: '<%= uglify.all.files %>',
+                    key: 'all',
+                    dest: 'js',
+                    type: 'js',
+                    ext: '.min.js'
+                },
+
+                {
+                    assets: '<%= cssmin.main.files %>',
+                    key: 'global',
                     dest: 'css',
                     type: 'css',
                     ext: '.min.css'
@@ -111,12 +129,28 @@ module.exports = function ( grunt ) {
                     namespace: 'static.assets'
                 },
                 files: [{
-                    assets: '<%= uglify.dist.files %>',
+                    assets: '<%= uglify.main.files %>',
+                    key: 'global',
                     dest: 'js',
                     type: 'js',
                     ext: '.js'
                 }, {
-                    assets: '<%= cssmin.dist.files %>',
+                    assets: '<%= uglify.plugin.files %>',
+                    key: 'global',
+                    dest: 'js',
+                    type: 'js',
+                    ext: '.js'
+                }, {
+                    assets: '<%= uglify.all.files %>',
+                    key: 'all',
+                    dest: 'js',
+                    type: 'js',
+                    ext: '.js'
+                },
+
+                {
+                    assets: '<%= cssmin.main.files %>',
+                    key: 'global',
                     dest: 'css',
                     type: 'css',
                     ext: '.css'
@@ -130,15 +164,31 @@ module.exports = function ( grunt ) {
                     namespace: 'static.assets'
                 },
                 files: [{
-                    assets: '<%= uglify.dist.files %>',
+                    assets: '<%= uglify.main.files %>',
+                    key: 'global',
                     dest: '',
                     type: 'js',
-                    ext: '.js'
+                    ext: '.min.js'
                 }, {
-                    assets: '<%= cssmin.dist.files %>',
+                    assets: '<%= uglify.plugin.files %>',
+                    key: 'global',
+                    dest: '',
+                    type: 'js',
+                    ext: '.min.js'
+                }, {
+                    assets: '<%= uglify.all.files %>',
+                    key: 'all',
+                    dest: '',
+                    type: 'js',
+                    ext: '.min.js'
+                },
+
+                {
+                    assets: '<%= cssmin.main.files %>',
+                    key: 'global',
                     dest: '',
                     type: 'css',
-                    ext: '.css'
+                    ext: '.min.css'
                 }]
             },
             prod: {
@@ -149,12 +199,28 @@ module.exports = function ( grunt ) {
                     outputConfigDir: 'public4/config'
                 },
                 files: [{
-                    assets: '<%= uglify.dist.files %>',
+                    assets: '<%= uglify.main.files %>',
+                    key: 'global',
                     dest: '',
                     type: 'js',
                     ext: '.js'
                 }, {
-                    assets: '<%= cssmin.dist.files %>',
+                    assets: '<%= uglify.plugin.files %>',
+                    key: 'global',
+                    dest: '',
+                    type: 'js',
+                    ext: '.js'
+                }, {
+                    assets: '<%= uglify.all.files %>',
+                    key: 'all',
+                    dest: '',
+                    type: 'js',
+                    ext: '.js'
+                },
+
+                {
+                    assets: '<%= cssmin.main.files %>',
+                    key: 'global',
                     dest: '',
                     type: 'css',
                     ext: '.css'
@@ -168,15 +234,31 @@ module.exports = function ( grunt ) {
                     outputConfigDir: 'public3/config'
                 },
                 files: [{
-                    assets: '<%= uglify.dist.files %>',
+                    assets: '<%= uglify.main.files %>',
+                    key: 'global',
                     dest: 'static',
                     type: 'js',
-                    ext: '.js'
+                    ext: '.min.js'
                 }, {
-                    assets: '<%= cssmin.dist.files %>',
+                    assets: '<%= uglify.plugin.files %>',
+                    key: 'global',
+                    dest: 'static',
+                    type: 'js',
+                    ext: '.min.js'
+                }, {
+                    assets: '<%= uglify.all.files %>',
+                    key: 'all',
+                    dest: 'static',
+                    type: 'js',
+                    ext: '.min.js'
+                },
+
+                {
+                    assets: '<%= cssmin.main.files %>',
+                    key: 'global',
                     dest: 'static',
                     type: 'css',
-                    ext: '.css'
+                    ext: '.min.css'
                 }]
             }
         }

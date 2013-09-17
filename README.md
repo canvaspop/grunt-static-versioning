@@ -17,11 +17,11 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-static-versioning');
 ```
 
-**NOTE: This plugin requires some extra work on your end. It will create the versioned assets and a config file (PHP and JSON at the moment, more to come), but you will need to write an adapter to use that config. There will be examples in this repo under `examples`.**
+**NOTE: This plugin requires some extra work on your end. It will create the versioned assets and a config file (PHP and JSON at the moment with more to come), but you will need to write an adapter to use that file. There will be examples in this repo under the `examples` directory.**
 
 ### Options
 
-#### dest
+#### cwd
 
 Type: `String`  
 Default: ''
@@ -40,14 +40,14 @@ Specify which files the task will copy over to the destination directory. Can be
 Type: `String`  
 Default: 'json'
 
-Specify the type of config file to generate. This will generate an `assets.config.[ PHP|JSON ]` file which can be used to insert the proper files in the source. The config file will only contain paths to development or minified files depending on the `env` option. Can be: `json` or `php`.
+Specify the type of config file to generate. This will generate an `assets.config.[ EXTENSION ]` file which can be used to insert the proper files in the source. The config file will only contain paths to development or minified files based on the `env` option. Can be: `json` or `php`.
 
 #### outputConfigDir
 
 Type: `String`  
 Default: ''
 
-Specify the location where the config file will be generated. If left empty, it will used the `dest` option.
+Specify the location where the config file will be generated. If left empty, it will used the `cwd` option.
 
 #### namespace
 
@@ -63,7 +63,7 @@ Namespace wrapping the file assets config generated file.
 Type: `Array`  
 Default: null
 
-An array of files that will be versioned. They can be manually entered or leveraged from the `uglify` and `cssmin` tasks. **NOTE: If the files are provided manually, they MUST exist. This task does NOT concat/minify any files, it simply renames and copies existing files to proper location.**
+An array of files that will be versioned. They can be manually entered or leveraged from the `uglify` and `cssmin` tasks. **NOTE: If the files are provided manually, they MUST exist. This task does NOT concat/minify any files, it simply renames and copies existing files to proper destination.**
 
 #### dest
 
@@ -86,6 +86,13 @@ Default: ''
 
 The extension to apply to the files. Files will follow the naming pattern: `[filename].[md5_hash].[ext]`. E.g.: `.js`, `.css`, `.min.js`, `.min.css`.
 
+#### key
+
+Type: `String`  
+Default: ''
+
+The key is used to organize the files in the config file. The same key can be used multiple times to organized multiples files together.
+
 ### Usage Examples
 
 #### Example config
@@ -94,7 +101,7 @@ The extension to apply to the files. Files will follow the naming pattern: `[fil
 grunt.initConfig({
   versioning: {               // Task
     options: {                // Task options
-      dest: ''
+      cwd: ''
     },
     dist: {                   // Target
       options: {              // Target options
@@ -102,23 +109,22 @@ grunt.initConfig({
       files: [{
         assets: [{
             src: [ 'file1.js', 'file2.js' ],
-            dest: 'tmp/js/main.min.js',
-            versioningParent: 'global'
+            dest: 'tmp/js/main.min.js'
         }, {
             src: [ 'plugin1.js', 'plugin2.js' ],
-            dest: 'tmp/js/plugin.min.js',
-            versioningParent: 'global'
+            dest: 'tmp/js/plugin.min.js'
         }],
-        dir: 'js',
+        key: 'global',
+        dest: 'js',
         type: 'js',
         ext: '.min.js'
       }, {
         assets: [{
             src: [ 'main.css' ],
-            dest: 'tmp/css/main.min.css',
-            versioningParent: 'global'
+            dest: 'tmp/css/main.min.css'
         }],
-        dir: 'css',
+        key: 'global',
+        dest: 'css',
         type: 'css',
         ext: '.min.css'
       }]
@@ -128,102 +134,87 @@ grunt.initConfig({
 
 grunt.loadNpmTasks('grunt-static-versioning');
 
-grunt.registerTask('default', ['jshint', 'versioning']);
+grunt.registerTask('default', ['versioning']);
 ```
 
 #### Leveraging other tasks
 
-This task is built to leverage other existing tasks. Instead of manually providing the files array, it can be read from `uglify` and `cssmin` tasks.
+This task is built to leverage other existing tasks. Instead of manually providing the files array, it can be read from the `uglify` and `cssmin` tasks.
 
 ```javascript
 grunt.initConfig({
   cssmin: {
-    dist: {
+    main: {
       files: [{
         src: [ 'main.css' ],
-        dest: 'tmp/main.min.css',
-        versioningParent: 'global'   // Used to group files in the assets.config
+        dest: 'tmp/main.min.css'
       }]
     }
   },
 
   uglify: {
-    dist: {
+    main: {
       files: [{
         src: [
           'file1.js',
           'file2.js',
           'components/test/test.js'
         ],
-        dest: 'tmp/main.min.js',
-        versioningParent: 'global'   // Used to group files in the assets.config
-      }, {
+        dest: 'tmp/main.min.js'
+      }]
+    },
+    plugin: {
+      files: [{
         src: [
           'file3.js',
           'file4.js'
         ],
-        dest: 'tmp/plugin.min.js',
-        versioningParent: 'global'   // Used to group files in the assets.config
+        dest: 'tmp/plugin.min.js'
       }]
     }
   },
 
   versioning: {
     options: {
-      dest: 'public'
+      cwd: 'public',
+      outputConfigDir: 'public/config'
     },
     dist: {
       files: [{
-        assets: '<%= uglify.dist.files %>',
-        dir: 'js',
+        assets: '<%= uglify.main.files %>',
+        key: 'global',
+        dest: 'js',
         type: 'js',
         ext: '.min.js'
       }, {
-        assets: '<%= cssmin.dist.files %>',
-        dir: 'css',
+        assets: '<%= uglify.plugin.files %>',
+        key: 'global',
+        dest: 'js',
+        type: 'js',
+        ext: '.min.js'
+      }, {
+        assets: '<%= cssmin.main.files %>',
+        key: 'global',
+        dest: 'css',
         type: 'css',
         ext: '.min.css'
       }]
     }
   }
 });
+
+grunt.loadNpmTasks('grunt-contrib-cssmin');
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-static-versioning');
+
+grunt.registerTask('default', ['uglify', 'cssmin', 'versioning']);
 ```
 
 The above example would output:
 * `public/js/main.[ MD5_HASH ].min.js`
 * `public/js/plugin.[ MD5_HASH ].min.js`
 * `public/css/main.[ MD5_HASH ].min.css`
-
-#### Generated config file
-
-```javascript
-grunt.initConfig({
-  versioning: {
-    options: {
-      dest: 'public'
-    },
-    dist: {
-      options: {
-        output: 'php',
-        outputConfigDir: 'public/config'
-      },
-      files: [{
-        assets: '<%= uglify.dist.files %>',
-        dir: 'js',
-        type: 'js',
-        ext: '.min.js'
-      }, {
-        assets: '<%= cssmin.dist.files %>',
-        dir: 'css',
-        type: 'css',
-        ext: '.min.css'
-      }]
-    }
-  }
-});
-```
-
-The above will generate a `public/config/assets.config.php` file.
+* `public/config/assets.config.json`
 
 ## Sample assets.config
 
@@ -234,7 +225,7 @@ The above will generate a `public/config/assets.config.php` file.
 ```javascript
 {
   "staticAssets": {
-    "global": {                // <--- taken from the `versioningParent`
+    "global": {                // <--- 'key' option
       "js": [
         "main.c2e864c8.js",
         "plugin.24d54461.js"
@@ -243,7 +234,7 @@ The above will generate a `public/config/assets.config.php` file.
         "main.b6f17edb.css"
       ]
     },
-    "all": {                   // <--- taken from the `versioningParent`
+    "all": {                   // <--- 'key' option
       "js": [
         "all.625a4fd0.js"
       ],
@@ -258,7 +249,7 @@ The above will generate a `public/config/assets.config.php` file.
 ```javascript
 {
   "staticAssets": {
-    "global": {                // <--- taken from the `versioningParent`
+    "global": {                // <--- 'key' option
       "js": [
         "test/src/js/file1.js",
         "test/src/js/file2.js",
@@ -270,7 +261,7 @@ The above will generate a `public/config/assets.config.php` file.
         "test/src/css/main.css"
       ]
     },
-    "all": {                   // <--- taken from the `versioningParent`
+    "all": {                   // <--- 'key' option
       "js": [
         "test/src/js/file1.js",
         "test/src/js/file2.js",
@@ -345,6 +336,7 @@ return array(
 
 ## Release history
 
+* 2013-09-17 0.2.0
 * 2013-08-26 0.1.1 Initial release. Not yet officially released.
 * 2013-08-26 0.1.0 Initial release. Not yet officially released.
 
