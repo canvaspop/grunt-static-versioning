@@ -6,15 +6,15 @@ return array(
                 '/css/main.b6f17edb.css',
             ),
             'js' => array(
-                '/js/main.c2e864c8.js',
-                '/js/plugin.24d54461.js',
+                '/js/main.cce1a4ed.js',
+                '/js/plugin.71f3b3f2.js',
             ),
         ),
         'all' => array(
             'css' => array(
             ),
             'js' => array(
-                '/js/all.625a4fd0.js',
+                '/js/all.3039dd25.js',
             ),
         ),
     )

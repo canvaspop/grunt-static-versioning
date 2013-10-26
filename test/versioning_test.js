@@ -5,23 +5,27 @@ var grunt = require( 'grunt' ),
 
 exports.versioning = {
     dist: function ( test ) {
-        test.expect( 3 );
+        test.expect( 4 );
 
-        var main, plug, style;
+        var main, plug, style, skip;
 
         try {
-            main = grunt.file.read( 'public/js/main.c2e864c8.min.js' );
+            main = grunt.file.read( 'public/js/main.cce1a4ed.min.js' );
         } catch ( e ) {}
         try {
-            plug = grunt.file.read( 'public/js/plugin.24d54461.min.js' );
+            plug = grunt.file.read( 'public/js/plugin.71f3b3f2.min.js' );
         } catch ( e ) {}
         try {
             style = grunt.file.read( 'public/css/main.b6f17edb.min.css' );
+        } catch ( e ) {}
+        try {
+            skip = grunt.file.read( 'public/js/skip.min.js' );
         } catch ( e ) {}
 
         test.ok( main, 'should have created main js file with hash' );
         test.ok( plug, 'should have created plugin js file with hash' );
         test.ok( style, 'should have created main css file with hash' );
+        test.ok( skip, 'should have created skip js file without hash' );
 
         test.done();
     },
@@ -34,10 +38,10 @@ exports.versioning = {
             expected = grunt.file.read( fixtures + '/assets.config.prod.php' );
 
         try {
-            main = grunt.file.read( 'public2/js/main.c2e864c8.js' );
+            main = grunt.file.read( 'public2/js/main.cce1a4ed.js' );
         } catch ( e ) {}
         try {
-            plug = grunt.file.read( 'public2/js/plugin.24d54461.js' );
+            plug = grunt.file.read( 'public2/js/plugin.71f3b3f2.js' );
         } catch ( e ) {}
         try {
             style = grunt.file.read( 'public2/css/main.b6f17edb.css' );
@@ -62,7 +66,7 @@ exports.versioning = {
         test.done();
     },
     prod: function ( test ) {
-        test.expect( 6 );
+        test.expect( 7 );
 
         var config = grunt.config.get( 'versioningConfig:prod' ),
             task = grunt.config( 'versioning' ).prod,
