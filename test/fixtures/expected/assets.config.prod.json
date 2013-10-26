@@ -3,7 +3,8 @@
     "global": {
       "js": [
         "/main.cce1a4ed.js",
-        "/plugin.71f3b3f2.js"
+        "/plugin.71f3b3f2.js",
+        "/skip.js"
       ],
       "css": [
         "/main.b6f17edb.css"

@@ -5,9 +5,9 @@ var grunt = require( 'grunt' ),
 
 exports.versioning = {
     dist: function ( test ) {
-        test.expect( 3 );
+        test.expect( 4 );
 
-        var main, plug, style;
+        var main, plug, style, skip;
 
         try {
             main = grunt.file.read( 'public/js/main.cce1a4ed.min.js' );
@@ -18,10 +18,14 @@ exports.versioning = {
         try {
             style = grunt.file.read( 'public/css/main.b6f17edb.min.css' );
         } catch ( e ) {}
+        try {
+            skip = grunt.file.read( 'public/js/skip.min.js' );
+        } catch ( e ) {}
 
         test.ok( main, 'should have created main js file with hash' );
         test.ok( plug, 'should have created plugin js file with hash' );
         test.ok( style, 'should have created main css file with hash' );
+        test.ok( skip, 'should have created skip js file without hash' );
 
         test.done();
     },
@@ -62,7 +66,7 @@ exports.versioning = {
         test.done();
     },
     prod: function ( test ) {
-        test.expect( 6 );
+        test.expect( 7 );
 
         var config = grunt.config.get( 'versioningConfig:prod' ),
             task = grunt.config( 'versioning' ).prod,

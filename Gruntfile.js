@@ -63,6 +63,15 @@ module.exports = function ( grunt ) {
                     dest: 'tmp/js/main.min.js'
                 }]
             },
+            skip: {
+                files: [{
+                    src: [
+                        'test/src/js/file1.js',
+                        'test/src/js/file2.js'
+                    ],
+                    dest: 'tmp/js/skip.min.js'
+                }]
+            },
             plugin: {
                 files: [{
                     src: [
@@ -108,6 +117,13 @@ module.exports = function ( grunt ) {
                 }, {
                     assets: '<%= uglify.all.files %>',
                     key: 'all',
+                    dest: 'js',
+                    type: 'js',
+                    ext: '.min.js'
+                }, {
+                    assets: '<%= uglify.skip.files %>',
+                    key: 'skip',
+                    bypass: true,
                     dest: 'js',
                     type: 'js',
                     ext: '.min.js'
@@ -181,6 +197,13 @@ module.exports = function ( grunt ) {
                     dest: '',
                     type: 'js',
                     ext: '.min.js'
+                }, {
+                    assets: '<%= uglify.skip.files %>',
+                    key: 'skip',
+                    bypass: true,
+                    dest: '',
+                    type: 'js',
+                    ext: '.min.js'
                 },
 
                 {
@@ -213,6 +236,13 @@ module.exports = function ( grunt ) {
                 }, {
                     assets: '<%= uglify.all.files %>',
                     key: 'all',
+                    dest: '',
+                    type: 'js',
+                    ext: '.js'
+                }, {
+                    assets: '<%= uglify.skip.files %>',
+                    key: 'global',
+                    bypass: true,
                     dest: '',
                     type: 'js',
                     ext: '.js'

@@ -30,7 +30,7 @@ module.exports = function ( app ) {
             var obj = data.staticAssets[ key ];
             if ( obj && obj.css ) {
                 return obj.css.map( function ( src ) {
-                    return '<link rel="stylesheet" href="' + src + '"></script>';
+                    return '<link rel="stylesheet" href="' + src + '">';
                 } ).join( '\n ' );
             } else {
                 return '';

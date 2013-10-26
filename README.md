@@ -93,6 +93,13 @@ Default: ''
 
 The key is used to organize the files in the config file. The same key can be used multiple times to organized multiples files together.
 
+#### bypass
+
+Type: `Boolean`  
+Default: false
+
+If set to true, the file will bypass versioning and simply append the given extension.
+
 ### Usage Examples
 
 #### Example config
@@ -189,6 +196,7 @@ grunt.initConfig({
       }, {
         assets: '<%= uglify.plugin.files %>',
         key: 'global',
+        bypass: true,
         dest: 'js',
         type: 'js',
         ext: '.min.js'
@@ -212,7 +220,7 @@ grunt.registerTask('default', ['uglify', 'cssmin', 'versioning']);
 
 The above example would output:
 * `public/js/main.[ MD5_HASH ].min.js`
-* `public/js/plugin.[ MD5_HASH ].min.js`
+* `public/js/plugin.min.js` (no hash because of `bypass` option)
 * `public/css/main.[ MD5_HASH ].min.css`
 * `public/config/assets.config.json`
 
@@ -227,16 +235,16 @@ The above example would output:
   "staticAssets": {
     "global": {                // <--- 'key' option
       "js": [
-        "main.c2e864c8.js",
-        "plugin.24d54461.js"
+        "main.c2e864c8.min.js",
+        "plugin.min.js"
       ],
       "css": [
-        "main.b6f17edb.css"
+        "main.b6f17edb.min.css"
       ]
     },
     "all": {                   // <--- 'key' option
       "js": [
-        "all.625a4fd0.js"
+        "all.625a4fd0.min.js"
       ],
       "css": []
     }
