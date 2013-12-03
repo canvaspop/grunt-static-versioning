@@ -266,19 +266,19 @@ module.exports = function ( grunt ) {
                 files: [{
                     assets: '<%= uglify.main.files %>',
                     key: 'global',
-                    dest: 'static',
+                    dest: 'static/js',
                     type: 'js',
                     ext: '.min.js'
                 }, {
                     assets: '<%= uglify.plugin.files %>',
                     key: 'global',
-                    dest: 'static',
+                    dest: 'static/js',
                     type: 'js',
                     ext: '.min.js'
                 }, {
                     assets: '<%= uglify.all.files %>',
                     key: 'all',
-                    dest: 'static',
+                    dest: 'static/js',
                     type: 'js',
                     ext: '.min.js'
                 },
@@ -286,7 +286,7 @@ module.exports = function ( grunt ) {
                 {
                     assets: '<%= cssmin.main.files %>',
                     key: 'global',
-                    dest: 'static',
+                    dest: 'static/css',
                     type: 'css',
                     ext: '.min.css'
                 }]

@@ -78,11 +78,14 @@ module.exports = function ( grunt ) {
                     grunt.log.ok( 'File "' + cwd + '' + dest + '" created.' );
                 } else {
                     asset.src.forEach( function ( src ) {
+                        var aFilename = src.split( '/' );
+                        var filename = aFilename[ aFilename.length - 1 ];
+
                         // push source files only to versioning object
-                        versioning[ parent ][ file.type ].push( '/' + fileDest + src );
+                        versioning[ parent ][ file.type ].push( '/' + fileDest + filename );
                         // copy file to out directory and log it
-                        grunt.file.copy( src, cwd + fileDest + src );
-                        grunt.log.ok( 'File "' + cwd + fileDest + src + '" created.' );
+                        grunt.file.copy( src, cwd + fileDest + filename );
+                        grunt.log.ok( 'File "' + cwd + fileDest + filename + '" created.' );
                     });
                 }
 
