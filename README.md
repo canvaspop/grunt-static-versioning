@@ -235,16 +235,16 @@ The above example would output:
   "staticAssets": {
     "global": {                // <--- 'key' option
       "js": [
-        "main.c2e864c8.min.js",
-        "plugin.min.js"
+        "/js/main.c2e864c8.min.js",
+        "/js/plugin.min.js"
       ],
       "css": [
-        "main.b6f17edb.min.css"
+        "/css/main.b6f17edb.min.css"
       ]
     },
     "all": {                   // <--- 'key' option
       "js": [
-        "all.625a4fd0.min.js"
+        "/js/all.625a4fd0.min.js"
       ],
       "css": []
     }
@@ -259,22 +259,22 @@ The above example would output:
   "staticAssets": {
     "global": {                // <--- 'key' option
       "js": [
-        "test/src/js/file1.js",
-        "test/src/js/file2.js",
-        "test/components/test/test.js",
-        "test/src/js/file3.js",
-        "test/src/js/file4.js"
+        "/js/file1.js",
+        "/js/file2.js",
+        "/js/test.js",
+        "/js/file3.js",
+        "/js/file4.js"
       ],
       "css": [
-        "test/src/css/main.css"
+        "/css/main.css"
       ]
     },
     "all": {                   // <--- 'key' option
       "js": [
-        "test/src/js/file1.js",
-        "test/src/js/file2.js",
-        "test/src/js/file3.js",
-        "test/src/js/file4.js"
+        "/js/file1.js",
+        "/js/file2.js",
+        "/js/file3.js",
+        "/js/file4.js"
       ],
       "css": []
     }
@@ -318,24 +318,24 @@ return array(
     'staticAssets' => array(
         'global' => array(
             'css' => array(
-                'test/src/css/main.css',
+                '/css/main.css',
             ),
             'js' => array(
-                'test/src/js/file1.js',
-                'test/src/js/file2.js',
-                'test/components/test/test.js',
-                'test/src/js/file3.js',
-                'test/src/js/file4.js',
+                '/js/file1.js',
+                '/js/file2.js',
+                '/js/test.js',
+                '/js/file3.js',
+                '/js/file4.js',
             ),
         ),
         'all' => array(
             'css' => array(
             ),
             'js' => array(
-                'test/src/js/file1.js',
-                'test/src/js/file2.js',
-                'test/src/js/file3.js',
-                'test/src/js/file4.js',
+                '/js/file1.js',
+                '/js/file2.js',
+                '/js/file3.js',
+                '/js/file4.js',
             ),
         ),
     )
