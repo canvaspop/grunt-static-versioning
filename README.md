@@ -344,6 +344,7 @@ return array(
 
 ## Release history
 
+* 2013-12-03 0.2.1
 * 2013-09-17 0.2.0
 * 2013-08-26 0.1.1 Initial release. Not yet officially released.
 * 2013-08-26 0.1.0 Initial release. Not yet officially released.
