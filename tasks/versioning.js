@@ -44,6 +44,20 @@ module.exports = function ( grunt ) {
         }
 
         this.files.forEach( function ( file ) {
+
+            if (file.orig.expand)
+            {
+                file.assets = [];
+  
+                file.src.forEach(function(filesrc) {
+                    file.assets.push({dest: filesrc, src: file.orig.cwd + '/' + file.dest});
+                    file.ext = file.orig.ext;
+                    file.dest = file.orig.dest;
+                    file.type = file.orig.type;
+                });
+
+            }
+             
             if ( !( file.assets instanceof Array ) ) {
                 grunt.fail.warn( 'Invalid argument : `assets` property must be set' );
             }
@@ -157,10 +171,10 @@ module.exports = function ( grunt ) {
             if ( obj.hasOwnProperty( key ) ) {
                 contents += '        \'' + key + '\' => array(\n';
                 contents += '            \'css\' => array(\n';
-                contents += extractFiles( obj[ key ].css );
+                contents += extractFiles( obj[ key ].css , 'php');
                 contents += '            ),\n';
                 contents += '            \'js\' => array(\n';
-                contents += extractFiles( obj[ key ].js );
+                contents += extractFiles( obj[ key ].js , 'php');
                 contents += '            ),\n';
                 contents += '        ),\n';
             }
@@ -181,11 +195,13 @@ module.exports = function ( grunt ) {
      * @param  {Array} arr Array of paths
      * @return {String}
      */
-    function extractFiles ( arr ) {
+    function extractFiles ( arr , type) {
         var contents = '';
         arr.forEach( function ( file ) {
             // space is for formatting on the output
-            contents += '                \'' + file + '\',\n';
+            if (type == 'php')
+                contents += '                 \'' + file.replace(/(.+)\/(.+)\.(.+)\.(.+)/,'$2') + '\'=>\'' + file + '\',\n';
+            else contents += '                \'' + file + '\',\n';
         });
         return contents;
     }
