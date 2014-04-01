@@ -1,7 +1,7 @@
 {
   "name": "grunt-static-versioning",
   "description": "Version static assets.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/canvaspop/grunt-static-versioning",
   "author": {
     "name": "CanvasPop",
