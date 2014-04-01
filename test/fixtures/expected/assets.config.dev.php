@@ -3,32 +3,32 @@ return array(
     'static.assets' => array(
         'global' => array(
             'css' => array(
-                '/main.css',
+                '/test.src.css.main.css',
             ),
             'js' => array(
-                '/file1.js',
-                '/file2.js',
-                '/test.js',
-                '/file3.js',
-                '/file4.js',
+                '/test.src.js.file1.js',
+                '/test.src.js.file2.js',
+                '/test.components.test.test.js',
+                '/test.src.js.file3.js',
+                '/test.src.js.file4.js',
             ),
         ),
         'all' => array(
             'css' => array(
             ),
             'js' => array(
-                '/file1.js',
-                '/file2.js',
-                '/file3.js',
-                '/file4.js',
+                '/test.src.js.file1.js',
+                '/test.src.js.file2.js',
+                '/test.src.js.file3.js',
+                '/test.src.js.file4.js',
             ),
         ),
         'skip' => array(
             'css' => array(
             ),
             'js' => array(
-                '/file1.js',
-                '/file2.js',
+                '/test.src.js.file1.js',
+                '/test.src.js.file2.js',
             ),
         ),
     )
