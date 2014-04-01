@@ -2,22 +2,22 @@
   "staticAssets": {
     "global": {
       "js": [
-        "/static/js/file1.js",
-        "/static/js/file2.js",
-        "/static/js/test.js",
-        "/static/js/file3.js",
-        "/static/js/file4.js"
+        "/static/js/test.src.js.file1.js",
+        "/static/js/test.src.js.file2.js",
+        "/static/js/test.components.test.test.js",
+        "/static/js/test.src.js.file3.js",
+        "/static/js/test.src.js.file4.js"
       ],
       "css": [
-        "/static/css/main.css"
+        "/static/css/test.src.css.main.css"
       ]
     },
     "all": {
       "js": [
-        "/static/js/file1.js",
-        "/static/js/file2.js",
-        "/static/js/file3.js",
-        "/static/js/file4.js"
+        "/static/js/test.src.js.file1.js",
+        "/static/js/test.src.js.file2.js",
+        "/static/js/test.src.js.file3.js",
+        "/static/js/test.src.js.file4.js"
       ],
       "css": []
     }

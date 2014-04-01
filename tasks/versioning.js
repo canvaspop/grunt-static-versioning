@@ -78,8 +78,9 @@ module.exports = function ( grunt ) {
                     grunt.log.ok( 'File "' + cwd + '' + dest + '" created.' );
                 } else {
                     asset.src.forEach( function ( src ) {
-                        var aFilename = src.split( '/' );
-                        var filename = aFilename[ aFilename.length - 1 ];
+                        // keep full path in the name to prevent collision
+                        var aFilename = src.replace( /\//g, '.' );
+                        var filename = aFilename;
 
                         // push source files only to versioning object
                         versioning[ parent ][ file.type ].push( '/' + fileDest + filename );
